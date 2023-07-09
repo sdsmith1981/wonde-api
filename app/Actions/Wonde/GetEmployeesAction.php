@@ -15,7 +15,7 @@ class GetEmployeesAction extends AbstractWondeAction
             return collect($employees->array)->map(function ($employee) {
                 return [
                     'value' => $employee->id,
-                    'name' => $employee->title . ' ' . $employee->forename . ' ' . $employee->surname,
+                    'name' => $employee->title.' '.$employee->forename.' '.$employee->surname,
                 ];
             });
         });

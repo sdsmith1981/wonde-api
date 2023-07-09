@@ -2,7 +2,6 @@
 
 use App\Models\User;
 
-
 test('the timetable index', function () {
 
     $client = Mockery::mock(\Wonde\Client::class);
@@ -13,16 +12,6 @@ test('the timetable index', function () {
     $response->assertStatus(200);
     $response->assertSee('timetable');
 });
-
-
-// using pest write a test for TimetableController::show that:
-// - asserts that the route exists
-// - asserts that the route is protected by auth
-// - asserts that the route returns a 200 status code
-// - asserts that the route requires a teacher_id parameter
-// - asserts that the route returns a json response
-
-
 
 test('the timetable show', function () {
     $this->actingAs($user = User::factory()->create());

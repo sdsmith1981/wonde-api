@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Wonde\GetClassesAction;
 use App\Actions\Wonde\GetEmployeesAction;
-use App\Actions\Wonde\GetTeacherAction;
 use App\Actions\Wonde\GetTeacherTimetableAction;
 use App\Http\Requests\TimetableShowRequest;
 use App\Http\Resources\DailyLessonResource;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 
 class TimetableController extends Controller
@@ -27,6 +23,7 @@ class TimetableController extends Controller
     public function show(TimetableShowRequest $request)
     {
         $timetable = app()->make(GetTeacherTimetableAction::class)->run($request->validated());
+
         return DailyLessonResource::collection($timetable);
 
     }

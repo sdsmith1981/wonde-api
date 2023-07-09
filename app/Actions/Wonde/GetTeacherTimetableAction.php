@@ -8,11 +8,10 @@ use Illuminate\Support\Facades\Cache;
 
 class GetTeacherTimetableAction
 {
-
     public function run(array $data)
     {
 
-        return Cache::remember('timetable_' . Arr::get($data, 'teacher'), now()->addHour(), function () use ($data) {
+        return Cache::remember('timetable_'.Arr::get($data, 'teacher'), now()->addHour(), function () use ($data) {
 
             $teacher = app()->make(GetTeacherAction::class)->run(Arr::get($data, 'teacher'), ['classes']);
 
@@ -20,8 +19,8 @@ class GetTeacherTimetableAction
                 $result = app()->make(GetClassesAction::class)->run($class->id, ['students', 'lessons', 'subject', 'lessons.room', 'lessons.period']);
 
                 return collect($result->lessons->data)->map(function ($lesson) use ($result) {
-                    return array_merge((array)$lesson, [
-                        'class' => Arr::only((array)$result, [
+                    return array_merge((array) $lesson, [
+                        'class' => Arr::only((array) $result, [
                             'name',
                             'description',
                             'subject',
